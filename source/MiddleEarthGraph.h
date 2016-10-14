@@ -1,13 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
 class Graph {
 
     struct Edge {
-        Node * to;
+        string to;
         int distance, roadQuality, riskLevel;
     };
 
@@ -19,8 +20,13 @@ class Graph {
     
     public:
         Graph(string nodesWithDistances);
-        //Node getNode(string);        
-        
+        Node* getNode(string node);
+        void addNode(string location, int distance);
+        int getSize();
+        string toString();       
+ 
     private:
-        Node locations[25];    
+        int locCounter;
+        Node * locations[25];
+        void intToString(int i);
 };
