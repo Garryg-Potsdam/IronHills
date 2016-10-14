@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 
 using namespace std;
@@ -17,8 +18,8 @@ class Graph {
     };
     
     public:
-        Graph();
-        Node getNode(string);        
+        Graph(string nodesWithDistances);
+        //Node getNode(string);        
         
     private:
         Node locations[25];    
