@@ -12,7 +12,7 @@ Lothlorien 660
 Fornost 925
 Isengard 890
 Hobbiton 1050
-Moria 620                                    
+Moria 620
 Brandy Hall 1000
 Dol Guldur 500
 Bree 900
