@@ -17,8 +17,8 @@ class Graph {
     struct Node {
         string locationName;
         int distanceToIronHills;
-	int totalCount;
-        Edge * edges;
+	int edgeCount;
+        Edge edges[8];
     };
     
     public:
@@ -29,7 +29,7 @@ class Graph {
 	
 	// Parameters: node - string name of the node wanted
 	// Returns: the node with the name passed in
-        Node* getNode(string node);
+        int getNode(string node);
         
 	// Parameters: location - the name of the node being added
 	//             distance - the distance from that current node
@@ -41,13 +41,24 @@ class Graph {
 	// Returns: int representing the amount of nodes in graph
         int getSize();
 	
+	// Parameters : from - the current location
+	//                to - the location the edge goes to
+	//                 d - the distance of the edge
+	//                rq - the road quality of the edge
+	//                rl - the risk level of the edge
+	// Post-Condition: addes an edge to the from node
+	void addEdge(string from, string to, int d, int rq, int rl);
+	
+	// Parameters: nodeConnData - a file of a specific format for adding edges
+	void addEdges(string nodeConnData);
+	
 	// Post-Condition: Builds a string of all the node data and prints
 	// Returns: printLocs - the constructed string of data
         string toString();       
  
     private:
         int locCounter;
-        Node * locations;
+        Node locations[25];
 		
 	// Parameters: i - the int to be converted to a string
 	// Returns: the string of a passed in int

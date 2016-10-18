@@ -10,7 +10,8 @@ const string CONNECTIONS_BETWEEN_NODES = "connectiontable.txt";
 
 int main() {    
     Graph * g;
-    g = new Graph(NODES_WITH_DISTANCES_TO_IRON_HILLS);    
+    g = new Graph(NODES_WITH_DISTANCES_TO_IRON_HILLS);
+    g->addEdges(CONNECTIONS_BETWEEN_NODES);    
     cout << g->toString();
     return 0;
 }
