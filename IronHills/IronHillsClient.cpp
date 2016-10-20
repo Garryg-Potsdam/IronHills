@@ -64,7 +64,7 @@ Heuristics getHeuristicsFromQuestion(string question) {
 	switch (input)
 	{
 	case 1:
-		return DISTANCE_TO_IRON_HILLS;
+		return DISTANCE;
 		break;
 	case 2:
 		return ROAD_QUALITY;
