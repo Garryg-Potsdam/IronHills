@@ -14,5 +14,7 @@ int main() {
     
 	cout << middleEarth.getSize();
 	cout << middleEarth.toString();
+
+	system("pause");
     return 0;
 }
