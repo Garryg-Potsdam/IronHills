@@ -11,6 +11,12 @@ Graph::Graph(string nodesWithDistances) {
 	ifstream inFile;
 	inFile.open(nodesWithDistances.c_str());
 
+	finalPath = new Path;
+	finalPath->fn = 0;
+	finalPath->path.push_back(0);
+	finalPath->location = 0;
+	finalPath->pathSum = 0;
+
 	// this loops builds the nodes line by line
 	// it also does the parsing
 	for (int i = 0; i < 25; i++) {
@@ -46,9 +52,10 @@ void Graph::aStar(string start, Heuristics h) {
 		}
 		delete curr;
 		curr = paths.top();
+		cout << locations[curr->location].locationName;
 		paths.pop();
 	}
-
+	finalPath = curr;
 }
 
 void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
@@ -174,19 +181,11 @@ string Graph::intToString(int i) {
 // Returns: printLocs - the constructed string of data
 string Graph::toString() {
 	string printLocs = "";
-	for (int i = 0; i < getSize(); i++) {
-		printLocs += "\n" + locations[i].locationName + " : ";
-		printLocs += "Distance To IronHills: " + intToString(locations[i].distanceToIronHills);
-		printLocs += "\n\n";
-		for (int j = 0; j < locations[i].edgeCount; j++) {
-			printLocs += "\tEdges:";
-			printLocs += "\tTo: " + locations[i].edges[j].to;
-			printLocs += "\tDistance: " + intToString(locations[i].edges[j].distance);
-			printLocs += "\tRoad Quality: " + intToString(locations[i].edges[j].roadQuality);
-			printLocs += "\tRisk Level: " + intToString(locations[i].edges[j].riskLevel);
-			printLocs += "\n";
-			printLocs += "|-----------------------------------------------------------------------------------------------|\n";
-		}
-	}
-	return printLocs;
+	printLocs += "Final Location: " + locations[finalPath->location].locationName;
+	printLocs += "Final F(n): " + intToString(finalPath->fn) + "\n";
+	printLocs += "Path Sum: " + intToString(finalPath->pathSum) + "\n";
+	printLocs += "Final Path: ";
+	for (int i = 0; i < finalPath->path.size(); i++)
+		printLocs += locations[finalPath->path[i]].locationName + " ";
+	return printLocs + "\n";
 }

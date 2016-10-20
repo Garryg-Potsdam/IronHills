@@ -39,6 +39,8 @@ private:
 		}
 	};
 
+	Path* finalPath;
+
 	int pathCounter;
 	priority_queue<Path*> paths;
 
