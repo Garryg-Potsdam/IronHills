@@ -12,7 +12,6 @@ int main() {
     Graph middleEarth = Graph(NODES_WITH_DISTANCES_TO_IRON_HILLS);
     middleEarth.addEdges(CONNECTIONS_BETWEEN_NODES);    
     
-	cout << middleEarth.getSize();
 	cout << middleEarth.toString();
 
 	system("pause");
