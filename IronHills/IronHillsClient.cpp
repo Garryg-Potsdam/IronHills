@@ -1,5 +1,6 @@
 #include "MiddleEarthGraph.h"
 #include "Heuristics.h"
+#include "ExceptionClass.h"
 
 using namespace std;
 
@@ -25,12 +26,6 @@ int main() {
 	question = "Would you like to use Distance (1), Road Quality (2) or Risk Level (3) as the heuristics?\t";
 	Heuristics h = getHeuristicsFromQuestion(question);
 
-	//need start, heuristics
-	// heuristics
-		// Road Quality 1
-		// Distance to IH 0	
-		// Risk level 2
-
 
 	cout << middleEarth.toString();
 
@@ -52,8 +47,25 @@ Heuristics getHeuristicsFromQuestion(string question) {
 	cout << question;
 
 	Heuristics ans;
+	int input;
 
-	cin >> ans;
+	cin >> input;
+
+	switch (input)
+	{
+	case 1:
+		ans = DISTANCE_TO_IRON_HILLS;
+		break;
+	case 2:
+		ans = ROAD_QUALITY;
+		break;
+	case 3:
+		ans = RISK_LEVEL;
+		break;
+	default:
+		throw new InvalidInputFromUserException();
+		break;
+	}
 
 	return ans;
 }

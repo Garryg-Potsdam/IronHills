@@ -21,6 +21,9 @@
     <ClInclude Include="Heuristics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ExceptionClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IronHillsClient.cpp">

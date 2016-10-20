@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExceptionClass.h" />
     <ClInclude Include="Heuristics.h" />
     <ClInclude Include="MiddleEarthGraph.h" />
   </ItemGroup>
