@@ -49,7 +49,7 @@ string getStringFromQuestion(string question){
 	
 	string ans;
 
-	cin >> ans;
+	getline(cin, ans);
 
 	return ans;
 }
@@ -60,6 +60,8 @@ Heuristics getHeuristicsFromQuestion(string question) {
 	int input;
 
 	cin >> input;
+
+	cout << "You typed " << input << endl;
 
 	switch (input)
 	{
