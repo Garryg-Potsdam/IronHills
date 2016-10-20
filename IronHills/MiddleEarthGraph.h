@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include <conio.h>
+#include <functional>
+#include <queue>
 #include <vector>
 #include "Heuristics.h"
 
@@ -32,10 +34,13 @@ private:
 		vector<int> path;
 		int pathSum;
 		int fn;
+		bool operator>(const Path* rhs) const {
+			return fn > rhs->fn;
+		}
 	};
 
 	int pathCounter;
-	vector<Path*> paths;
+	priority_queue<Path*> paths;
 
 	int locCounter;
 	Node locations[25];
@@ -73,10 +78,7 @@ private:
 	int calculateFn(int g, int h);
 	int getHeuristic(Edge e, Heuristics h);
 
-	void build_minheap(vector<Path*> paths, int n);
-	void min_heapify(vector<Path*> paths, int i, int n);
-	void addPath(int loc, int fn, int heur, int parent);
-	void deletePath(int path);
+	void addPath(int loc, int fn, int heur, int parent, const Path* curr);
 
 public:
 	// Graph Constuctor

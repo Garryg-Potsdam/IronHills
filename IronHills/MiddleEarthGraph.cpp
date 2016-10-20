@@ -29,33 +29,37 @@ Graph::Graph(string nodesWithDistances) {
 
 void Graph::aStar(string start, Heuristics h) {
 	int currLoc = getNode(start);
+	Path* curr = new Path;
+	curr->fn = 0;
+	curr->path.push_back(0);
+	curr->location = currLoc;
+	curr->pathSum = 0;	
 	
-	addPath(currLoc, 0, 0, 0);	
-
-	while (locations[currLoc].locationName.compare("Iron Hills") != 0) {
-		int edges = locations[currLoc].edgeCount;
+	while (locations[curr->location].locationName.compare("Iron Hills") != 0) {
+		int edges = locations[curr->location].edgeCount;
 		for (int i = 0; i < edges; i++) {
-			int to = getNode(locations[currLoc].edges[i].to);
+			int to = getNode(locations[curr->location].edges[i].to);
 			int dtih = locations[to].distanceToIronHills;
-			int heur = getHeuristic(locations[currLoc].edges[i], h);
+			int heur = getHeuristic(locations[curr->location].edges[i], h);
 			int fn = calculateFn(dtih, heur);
-			addPath(to, fn, heur, currLoc);			
-		}		
+			addPath(to, fn, heur, currLoc, curr);
+		}
+		delete curr;
+		curr = paths.top();
+		paths.pop();
 	}
+
 }
 
-void Graph::deletePath(int path) {
-	auto it = find(paths.begin(), paths.end(), path);
-	paths.erase(it);
-}
-
-void Graph::addPath(int loc, int fn, int heur, int parent) {
+void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
 	Path* p = new Path;
 	p->fn = fn;
 	p->location = loc;
+	p->path = curr->path;
 	p->path.push_back(parent);
-	p->pathSum += heur;
-	paths.push_back(p);
+	p->pathSum = curr->pathSum + heur;
+	paths.push(p);
+	delete p;
 }
 
 int Graph::calculateFn(int g, int h) {
@@ -185,31 +189,4 @@ string Graph::toString() {
 		}
 	}
 	return printLocs;
-}
-
-void Graph::min_heapify(vector<Path*> paths, int i, int n) {
-	Path* temp;
-	int j;
-
-	temp = paths[i];
-	j = 2 * i;
-	while (j <= n) {
-		if (j < n && paths[j + 1]->fn < paths[j]->fn)
-			j = j + 1;
-		if (temp->fn < paths[j]->fn)
-			break;
-		else if (temp->fn >= paths[j]->fn) {
-			paths[j / 2] = paths[j];
-			j = 2 * j;
-		}
-	}
-	paths[j / 2] = temp;
-	return;
-}
-
-void Graph::build_minheap(vector<Path*> paths, int n) {
-	int i;
-	for (i = n / 2; i >= 1; i--) {
-		min_heapify(paths, i, n);
-	}
 }
