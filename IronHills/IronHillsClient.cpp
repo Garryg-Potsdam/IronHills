@@ -16,7 +16,7 @@ Heuristics getHeuristicsFromQuestion(string question);
 
 int main() {    
     Graph middleEarth = Graph(NODES_WITH_DISTANCES_TO_IRON_HILLS);
-    middleEarth.addEdges(CONNECTIONS_BETWEEN_NODES);    
+    middleEarth.addEdges(CONNECTIONS_BETWEEN_NODES);
     
 	try {
 
@@ -29,6 +29,7 @@ int main() {
 		Heuristics h = getHeuristicsFromQuestion(question);
 
 		middleEarth.aStar(start, h);
+		cout << middleEarth.toString();
 
 	}
 	catch (...){

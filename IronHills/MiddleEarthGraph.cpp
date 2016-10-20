@@ -39,8 +39,7 @@ void Graph::aStar(string start, Heuristics h) {
 	curr->fn = 0;
 	curr->path.push_back(0);
 	curr->location = currLoc;
-	curr->pathSum = 0;	
-	
+	curr->pathSum = 0;
 	while (locations[curr->location].locationName.compare("Iron Hills") != 0) {
 		int edges = locations[curr->location].edgeCount;
 		for (int i = 0; i < edges; i++) {
@@ -52,7 +51,6 @@ void Graph::aStar(string start, Heuristics h) {
 		}
 		delete curr;
 		curr = paths.top();
-		cout << locations[curr->location].locationName;
 		paths.pop();
 	}
 	finalPath = curr;
@@ -65,8 +63,10 @@ void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
 	p->path = curr->path;
 	p->path.push_back(parent);
 	p->pathSum = curr->pathSum + heur;
+	cout << printPath(p) << endl;
 	paths.push(p);
-	delete p;
+	cout << printPath(paths.top()) << endl;
+	Path* check = paths.top();
 }
 
 int Graph::calculateFn(int g, int h) {
@@ -101,7 +101,7 @@ void Graph::addEdge(string from, string to, int d, int rq, int rl) {
 	// I assume you want to do this for all the edges? and not just the edge count
 	locations[temp].edges[locations[temp].edgeCount].to = to;
 	locations[temp].edges[locations[temp].edgeCount].distance = d;
-	locations[temp].edges[locations[temp].edgeCount].roadQuality = (rq * -1);
+	locations[temp].edges[locations[temp].edgeCount].roadQuality = rq;
 	locations[temp].edges[locations[temp].edgeCount].riskLevel = rl;
 	locations[temp].edgeCount++;
 }
@@ -179,9 +179,22 @@ string Graph::intToString(int i) {
 
 // Post-Condition: Builds a string of all the node data and prints
 // Returns: printLocs - the constructed string of data
+string Graph::printPath(Path* p) {
+	string printLocs = "";
+	printLocs += "To Location: " + locations[p->location].locationName + "\n";
+	printLocs += "Curr F(n): " + intToString(p->fn) + "\n";
+	printLocs += "Path Sum: " + intToString(p->pathSum) + "\n";
+	printLocs += "Curr Path: ";
+	for (int i = 0; i < p->path.size(); i++)
+		printLocs += locations[p->path[i]].locationName + " ";
+	return printLocs + "\n";
+}
+
+// Post-Condition: Builds a string of all the node data and prints
+// Returns: printLocs - the constructed string of data
 string Graph::toString() {
 	string printLocs = "";
-	printLocs += "Final Location: " + locations[finalPath->location].locationName;
+	printLocs += "Final Location: " + locations[finalPath->location].locationName + "\n";
 	printLocs += "Final F(n): " + intToString(finalPath->fn) + "\n";
 	printLocs += "Path Sum: " + intToString(finalPath->pathSum) + "\n";
 	printLocs += "Final Path: ";

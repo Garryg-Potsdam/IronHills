@@ -82,6 +82,8 @@ private:
 
 	void addPath(int loc, int fn, int heur, int parent, const Path* curr);
 
+	string printPath(Path* p);
+
 public:
 	// Graph Constuctor
 	// Parameters: nodesWithDistances - take a specificly formatted file's name and 
