@@ -28,8 +28,7 @@ int main() {
 		question = "Would you like to use Distance (1), Road Quality (2) or Risk Level (3) as the heuristics?\t";
 		Heuristics h = getHeuristicsFromQuestion(question);
 
-
-		cout << middleEarth.toString();
+		middleEarth.aStar(start, h);
 
 	}
 	catch (...){
@@ -44,7 +43,7 @@ int main() {
     return 0;
 }
 
-string getStringFromQuestion(string question){
+string getStringFromQuestion(string question) {
 	cout << question;
 	
 	string ans;
