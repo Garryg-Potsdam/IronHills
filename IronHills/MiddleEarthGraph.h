@@ -2,23 +2,14 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <conio.h>
+#include <vector>
+#include "Heuristics.h"
+
 
 using namespace std;
 
 class Graph {	
-
-public:
-	// Graph Constuctor
-	// Parameters: nodesWithDistances - take a specificly formatted file's name and 
-	//                                  builds a graph with it
-	Graph(string nodesWithDistances);	
-
-	// Parameters: nodeConnData - a file of a specific format for adding edges
-	void addEdges(string nodeConnData);
-
-	// Post-Condition: Builds a string of all the node data and prints
-	// Returns: printLocs - the constructed string of data
-	string toString();
 
 private:
 
@@ -35,6 +26,16 @@ private:
 		int edgeCount;
 		Edge edges[8];
 	};
+
+	struct Path {
+		int location;
+		vector<int> path;
+		int pathSum;
+		int fn;
+	};
+
+	int pathCounter;
+	vector<Path*> paths;
 
 	int locCounter;
 	Node locations[25];
@@ -68,5 +69,30 @@ private:
 	// Parameters: node - string name of the node wanted
 	// Returns: the node with the name passed in
 	int getNode(string node);
+
+	int calculateFn(int g, int h);
+	int getHeuristic(Edge e, Heuristics h);
+
+	void build_minheap(vector<Path*> paths, int n);
+	void min_heapify(vector<Path*> paths, int i, int n);
+	void addPath(int loc, int fn, int heur, int parent);
+	void deletePath(int path);
+
+public:
+	// Graph Constuctor
+	// Parameters: nodesWithDistances - take a specificly formatted file's name and 
+	//                                  builds a graph with it
+	Graph(string nodesWithDistances);	
+
+	// Parameters: nodeConnData - a file of a specific format for adding edges
+	void addEdges(string nodeConnData);
+
+
+	void aStar(string start, Heuristics h);
+	
+
+	// Post-Condition: Builds a string of all the node data and prints
+	// Returns: printLocs - the constructed string of data
+	string toString();
 
 };
