@@ -18,16 +18,27 @@ int main() {
     Graph middleEarth = Graph(NODES_WITH_DISTANCES_TO_IRON_HILLS);
     middleEarth.addEdges(CONNECTIONS_BETWEEN_NODES);    
     
-	// get the starting city
-	string question = "Where would you like to begin your quest?\t";
-	string start = getStringFromQuestion(question);
-	
-	// get the heuristic nessecary
-	question = "Would you like to use Distance (1), Road Quality (2) or Risk Level (3) as the heuristics?\t";
-	Heuristics h = getHeuristicsFromQuestion(question);
+	try {
+
+		// get the starting city
+		string question = "Where would you like to begin your quest?\t";
+		string start = getStringFromQuestion(question);
+
+		// get the heuristic nessecary
+		question = "Would you like to use Distance (1), Road Quality (2) or Risk Level (3) as the heuristics?\t";
+		Heuristics h = getHeuristicsFromQuestion(question);
 
 
-	cout << middleEarth.toString();
+		cout << middleEarth.toString();
+
+	}
+	catch (...){
+		string quote = "It's a dangerous business, Frodo, going out your door. ";
+		quote += "You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept off to.";
+		cout << quote << endl << endl;
+
+		cout << "But some exception was thrown, and we're dead. We failed to make it, to our Dwarvish home.";
+	}
 
 	system("pause");
     return 0;
@@ -46,7 +57,6 @@ string getStringFromQuestion(string question){
 Heuristics getHeuristicsFromQuestion(string question) {
 	cout << question;
 
-	Heuristics ans;
 	int input;
 
 	cin >> input;
@@ -54,18 +64,16 @@ Heuristics getHeuristicsFromQuestion(string question) {
 	switch (input)
 	{
 	case 1:
-		ans = DISTANCE_TO_IRON_HILLS;
+		return DISTANCE_TO_IRON_HILLS;
 		break;
 	case 2:
-		ans = ROAD_QUALITY;
+		return ROAD_QUALITY;
 		break;
 	case 3:
-		ans = RISK_LEVEL;
+		return RISK_LEVEL;
 		break;
 	default:
 		throw new InvalidInputFromUserException();
 		break;
 	}
-
-	return ans;
 }
