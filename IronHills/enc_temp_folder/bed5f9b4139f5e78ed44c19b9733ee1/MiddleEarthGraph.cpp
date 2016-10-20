@@ -47,21 +47,21 @@ void Graph::addEdge(string from, string to, int d, int rq, int rl) {
 // Parameters: nodeConnData - a file of a specific format for adding edges
 void Graph::addEdges(string nodeConnData) {
 	string from;
-	ifstream inFile;
-	inFile.open(nodeConnData.c_str());
+	ifstream infile;
+	infile.open(nodeConnData.c_str());
 
 	for (int t = 0; t < 23; t++) {
-		getline(inFile, from);
+		getline(infile, from);
 		string total;
-		getline(inFile, total);
+		getline(infile, total);
 		int x = stringToInt(total);
 		int d, rq, rl;
 		string to;
 
 		for (int i = 0; i < x; i++) {
-			getline(inFile, to);
+			getline(infile, to);
 			string temp;
-			getline(inFile, temp);
+			getline(infile, temp);
 			d = stringToInt(temp.substr(0, temp.find(" ")));
 			temp.erase(0, temp.find(" ") + 1);
 			rq = stringToInt(temp.substr(0, temp.find(" ")));
