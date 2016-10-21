@@ -27,22 +27,26 @@ private:
 		int distanceToIronHills;
 		int edgeCount;
 		Edge edges[8];
+		bool visited;
 	};
 
 	struct Path {
 		int location;
 		vector<int> path;
 		int pathSum;
-		int fn;
-		bool operator>(const Path* rhs) const {
-			return fn > rhs->fn;
+		int fn;		
+	};
+
+	struct ComparePath : public binary_function<Path*, Path*, bool> {
+		bool operator()(const Path* lhs, const Path* rhs) const {
+			return lhs->fn > rhs->fn;
 		}
 	};
 
 	Path* finalPath;
 
 	int pathCounter;
-	priority_queue<Path*> paths;
+	priority_queue<Path*, vector<Path*>, ComparePath> paths;
 
 	int locCounter;
 	Node locations[25];

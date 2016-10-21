@@ -24,7 +24,6 @@ Graph::Graph(string nodesWithDistances) {
 		string name = currentNode.substr(0, currentNode.find(" "));
 		currentNode.erase(0, currentNode.find(" ") + 1);
 		string temp;
-		int x;
 		if (currentNode.find(" ") != -1) {
 			name += " " + currentNode.substr(0, currentNode.find(" "));
 			currentNode.erase(0, currentNode.find(" ") + 1);
@@ -42,11 +41,20 @@ void Graph::aStar(string start, Heuristics h) {
 	curr->pathSum = 0;
 	while (locations[curr->location].locationName.compare("Iron Hills") != 0) {
 		int edges = locations[curr->location].edgeCount;
+		cout << "Current Location: " << locations[curr->location].locationName << endl;
 		for (int i = 0; i < edges; i++) {
 			int to = getNode(locations[curr->location].edges[i].to);
+			cout << "To: " << to << endl;
+			cout << "To Location: " << locations[to].locationName << endl;
+			for (int j = 0; j < curr->path.size(); j++)
+				if (curr->path[j] == to)
+					continue;
 			int dtih = locations[to].distanceToIronHills;
+			cout << "DTIH: " << dtih << endl;
 			int heur = getHeuristic(locations[curr->location].edges[i], h);
+			cout << "HEUR: " << heur << endl;
 			int fn = calculateFn(dtih, heur);
+			cout << "FN: " << fn << endl;
 			addPath(to, fn, heur, currLoc, curr);
 		}
 		delete curr;
@@ -63,9 +71,9 @@ void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
 	p->path = curr->path;
 	p->path.push_back(parent);
 	p->pathSum = curr->pathSum + heur;
-	cout << printPath(p) << endl;
+
+	//cout << printPath(p) << endl;
 	paths.push(p);
-	cout << printPath(paths.top()) << endl;
 	Path* check = paths.top();
 }
 
@@ -166,6 +174,7 @@ void Graph::addNode(string location, int distance) {
 	locations[locCounter].locationName = location;
 	locations[locCounter].distanceToIronHills = distance;
 	locations[locCounter].edgeCount = 0;
+	locations[locCounter].visited = false;
 	locCounter++;
 }
 
