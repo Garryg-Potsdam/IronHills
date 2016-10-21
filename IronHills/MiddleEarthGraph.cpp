@@ -55,7 +55,7 @@ void Graph::aStar(string start, Heuristics h) {
 			cout << "HEUR: " << heur << endl;
 			int fn = calculateFn(dtih, heur);
 			cout << "FN: " << fn << endl;
-			addPath(to, fn, heur, currLoc, curr);
+			addPath(to, fn, heur, curr->location, curr);
 		}
 		delete curr;
 		curr = paths.top();
@@ -71,8 +71,6 @@ void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
 	p->path = curr->path;
 	p->path.push_back(parent);
 	p->pathSum = curr->pathSum + heur;
-
-	//cout << printPath(p) << endl;
 	paths.push(p);
 	Path* check = paths.top();
 }
@@ -109,7 +107,7 @@ void Graph::addEdge(string from, string to, int d, int rq, int rl) {
 	// I assume you want to do this for all the edges? and not just the edge count
 	locations[temp].edges[locations[temp].edgeCount].to = to;
 	locations[temp].edges[locations[temp].edgeCount].distance = d;
-	locations[temp].edges[locations[temp].edgeCount].roadQuality = rq;
+	locations[temp].edges[locations[temp].edgeCount].roadQuality = (rq * -1);
 	locations[temp].edges[locations[temp].edgeCount].riskLevel = rl;
 	locations[temp].edgeCount++;
 }
