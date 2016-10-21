@@ -36,28 +36,20 @@ void Graph::aStar(string start, Heuristics h) {
 	int currLoc = getNode(start);
 	Path* curr = new Path;
 	curr->fn = 0;
-	curr->path.push_back(0);
 	curr->location = currLoc;
 	curr->pathSum = 0;
+
 	while (locations[curr->location].locationName.compare("Iron Hills") != 0) {
-
-		cout << locations[curr->location].locationName << endl;
-
+		
 		int edges = locations[curr->location].edgeCount;
-		cout << "Current Location: " << locations[curr->location].locationName << endl;
 		for (int i = 0; i < edges; i++) {
 			int to = getNode(locations[curr->location].edges[i].to);
-			cout << "To: " << to << endl;
-			cout << "To Location: " << locations[to].locationName << endl;
 			for (int j = 0; j < curr->path.size(); j++)
 				if (curr->path[j] == to)
 					continue;
 			int dtih = locations[to].distanceToIronHills;
-			cout << "DTIH: " << dtih << endl;
 			int heur = getHeuristic(locations[curr->location].edges[i], h);
-			cout << "HEUR: " << heur << endl;
 			int fn = calculateFn(dtih, heur);
-			cout << "FN: " << fn << endl;
 			addPath(to, fn, heur, curr->location, curr);
 		}
 		delete curr;
@@ -74,8 +66,7 @@ void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
 	p->path = curr->path;
 	p->path.push_back(parent);
 	p->pathSum = curr->pathSum + heur;
-	paths.push(p);
-	Path* check = paths.top();
+	paths.push(p);	
 }
 
 int Graph::calculateFn(int g, int h) {
@@ -185,19 +176,6 @@ string Graph::intToString(int i) {
 	stringstream ss;
 	ss << i;
 	return ss.str();
-}
-
-// Post-Condition: Builds a string of all the node data and prints
-// Returns: printLocs - the constructed string of data
-string Graph::printPath(Path* p) {
-	string printLocs = "";
-	printLocs += "To Location: " + locations[p->location].locationName + "\n";
-	printLocs += "Curr F(n): " + intToString(p->fn) + "\n";
-	printLocs += "Path Sum: " + intToString(p->pathSum) + "\n";
-	printLocs += "Curr Path: ";
-	for (int i = 0; i < p->path.size(); i++)
-		printLocs += locations[p->path[i]].locationName + " ";
-	return printLocs + "\n";
 }
 
 // Post-Condition: Builds a string of all the node data and prints

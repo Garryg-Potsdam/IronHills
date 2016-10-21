@@ -85,7 +85,6 @@ private:
 
 	void addPath(int loc, int fn, int heur, int parent, const Path* curr);
 
-	string printPath(Path* p);
 
 public:
 	// Graph Constuctor
