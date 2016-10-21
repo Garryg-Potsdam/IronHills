@@ -41,6 +41,9 @@ void Graph::aStar(string start, Heuristics h) {
 	curr->location = currLoc;
 	curr->pathSum = 0;
 	while (locations[curr->location].locationName.compare("Iron Hills") != 0) {
+
+		cout << locations[curr->location].locationName << endl;
+
 		int edges = locations[curr->location].edgeCount;
 		for (int i = 0; i < edges; i++) {
 			int to = getNode(locations[curr->location].edges[i].to);
