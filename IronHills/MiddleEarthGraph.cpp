@@ -48,7 +48,7 @@ void Graph::aStar(string start, Heuristics h) {
 	curr->location = currLoc;
 	curr->pathSum = 0;
 
-	while (locations[curr->location].locationName.compare("Iron Hills") != 0) {
+	while (locations[curr->location].locationName.compare(GOAL_LOCATION) != 0) {
 		
 		int edges = locations[curr->location].edgeCount;
 		for (int i = 0; i < edges; i++) {
@@ -196,6 +196,7 @@ string Graph::toString() {
 	printLocs += "Path Sum: " + intToString(finalPath->pathSum) + "\n";
 	printLocs += "Final Path: ";
 	for (int i = 0; i < finalPath->path.size(); i++)
-		printLocs += locations[finalPath->path[i]].locationName + " ";
-	return printLocs + "\n";
+		printLocs += locations[finalPath->path[i]].locationName + " -> ";
+
+	return printLocs + locations[finalPath->location].locationName + "\n";
 }

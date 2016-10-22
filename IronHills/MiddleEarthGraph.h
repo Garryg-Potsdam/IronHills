@@ -19,6 +19,8 @@
 
 using namespace std;
 
+const string GOAL_LOCATION = "Iron Hills";
+
 class Graph {	
 
 private:
@@ -29,7 +31,7 @@ private:
 		int distance, roadQuality, riskLevel;
 	};
 
-	// Node with current location distance to iron hills and a list of edges as well as edge count
+	// Node with current location distance to GOAL_LOCATION and a list of edges as well as edge count
 	struct Node {
 		string locationName;
 		int distanceToIronHills;
