@@ -81,7 +81,7 @@ private:
 	int getNode(string node);
 
 	int calculateFn(int g, int h);
-	int getHeuristic(Edge e, Heuristics h);
+	int getSimpleHeuristic(Edge e, Heuristics h);
 
 	void addPath(int loc, int fn, int heur, int parent, const Path* curr);
 

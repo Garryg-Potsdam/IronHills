@@ -32,7 +32,7 @@ Graph::Graph(string nodesWithDistances) {
 	}
 }
 
-void Graph::aStar(string start, Heuristics h) {
+void Graph::aStar(string start, Heuristics h, bool simple) {
 	int currLoc = getNode(start);
 	Path* curr = new Path;
 	curr->fn = 0;
@@ -48,7 +48,11 @@ void Graph::aStar(string start, Heuristics h) {
 				if (curr->path[j] == to)
 					continue;
 			int dtih = locations[to].distanceToIronHills;
-			int heur = getHeuristic(locations[curr->location].edges[i], h);
+			int heur;
+			if (simple)
+				heur = getSimpleHeuristic(locations[curr->location].edges[i], h);
+			else
+				heur = getSimpleHeuristic(locations[curr->location].edges[i], h);
 			int fn = calculateFn(dtih, heur);
 			addPath(to, fn, heur, curr->location, curr);
 		}
@@ -73,7 +77,7 @@ int Graph::calculateFn(int g, int h) {
 	return g + h;
 }
 
-int Graph::getHeuristic(Edge e, Heuristics h) {
+int Graph::getSimpleHeuristic(Edge e, Heuristics h) {
 	switch (h) {
 		case ROAD_QUALITY:
 			return e.roadQuality;
