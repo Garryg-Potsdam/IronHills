@@ -61,7 +61,7 @@ void Graph::aStar(string start, Heuristics h, bool simple) {
 			if (simple)
 				heur = getSimpleHeuristic(locations[curr->location].edges[i], h);
 			else
-				heur = getSimpleHeuristic(locations[curr->location].edges[i], h);
+				heur = getComplexHeuristic(locations[curr->location].edges[i], h);
 			int fn = calculateFn(dtih, heur);
 			addPath(to, fn, heur, curr->location, curr);
 		}
@@ -70,6 +70,26 @@ void Graph::aStar(string start, Heuristics h, bool simple) {
 		paths.pop();
 	}
 	finalPath = curr;
+}
+
+int Graph::getComplexHeuristic(Edge e, Heuristics h) {
+	return 0;
+}
+
+int Graph::getSimpleHeuristic(Edge e, Heuristics h) {
+	switch (h) {
+	case ROAD_QUALITY:
+		return e.roadQuality;
+		break;
+	case DISTANCE:
+		return e.distance;
+		break;
+	case RISK_LEVEL:
+		return e.riskLevel;
+		break;
+	default:
+		break;
+	}
 }
 
 void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
@@ -84,22 +104,6 @@ void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
 
 int Graph::calculateFn(int g, int h) {
 	return g + h;
-}
-
-int Graph::getSimpleHeuristic(Edge e, Heuristics h) {
-	switch (h) {
-		case ROAD_QUALITY:
-			return e.roadQuality;
-			break;
-		case DISTANCE:
-			return e.distance;
-			break;
-		case RISK_LEVEL:
-			return e.riskLevel;
-			break;
-		default:
-			break;
-	}
 }
 
 // Parameters : from - the current location

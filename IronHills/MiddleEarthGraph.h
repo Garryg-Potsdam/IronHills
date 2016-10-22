@@ -92,7 +92,10 @@ private:
 	int getNode(string node);
 
 	int calculateFn(int g, int h);
+
 	int getSimpleHeuristic(Edge e, Heuristics h);
+
+	int getComplexHeuristic(Edge e, Heuristics h);
 
 	void addPath(int loc, int fn, int heur, int parent, const Path* curr);
 
@@ -107,7 +110,7 @@ public:
 	void addEdges(string nodeConnData);
 
 
-	void aStar(string start, Heuristics h);
+	void aStar(string start, Heuristics h, bool simple);
 	
 
 	// Post-Condition: Builds a string of all the node data and prints
