@@ -28,6 +28,9 @@ string getStartingCity();
 // prompts a user for the heuristic to use
 Heuristics getHeuristic();
 
+// prompts a user for the heuristic complexity
+bool getSimpleOrComplex();
+
 int main() {    
 
 	// Let's try something else
@@ -41,8 +44,11 @@ int main() {
 		// get heuristic
 		Heuristics h = getHeuristic();
 
+		// simple or complex heuristic
+		bool simple = getSimpleOrComplex();
+
 		// begin A*
-		middleEarth.aStar(start, h);
+		middleEarth.aStar(start, h, simple);
 
 		// Stream for output
 		ofstream fout;
@@ -119,3 +125,23 @@ Heuristics getHeuristic(){
 		break;
 	}
 }// End getHeuristic
+
+
+ // prompts a user for the heuristic complexity
+bool getSimpleOrComplex() {
+
+	string question = "Would you like to use simple or complex Heuristic?";
+	question += " Simple (1) or Complex (2) heuristic?\t";
+
+	// Answer a question
+	cout << question;
+
+	// variable for answer
+	int input;
+
+	// get response
+	cin >> input;
+
+	// return the answer as a boolean
+	return (input == 1);
+}
