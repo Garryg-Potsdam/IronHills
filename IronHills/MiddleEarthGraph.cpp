@@ -1,3 +1,12 @@
+//	Author:		Garry Griggs and Gregory Hughes
+//	Date:		October 24th 2016
+//	Project:	A* algorithm
+//	File:		MiddleEarthGraph.cpp
+//	Purpose:	This cpp file cotnains the implementation of the graph's 
+//					structure
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include "MiddleEarthGraph.h"
 
 using namespace std;

@@ -1,3 +1,12 @@
+//	Author:		Garry Griggs and Gregory Hughes
+//	Date:		October 24th 2016
+//	Project:	A* algorithm
+//	File:		MiddleEarthGraph.h
+//	Purpose:	This header file contatins the specifications for the graph's
+//					methods
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 #include <fstream>
 #include <string>
