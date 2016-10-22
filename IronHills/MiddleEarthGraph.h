@@ -1,3 +1,12 @@
+//	Author:		Garry Griggs and Gregory Hughes
+//	Date:		October 24th 2016
+//	Project:	A* algorithm
+//	File:		MiddleEarthGraph.h
+//	Purpose:	This header file contatins the specifications for the graph's
+//					methods
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,6 +19,8 @@
 
 using namespace std;
 
+const string GOAL_LOCATION = "Iron Hills";
+
 class Graph {	
 
 private:
@@ -20,7 +31,7 @@ private:
 		int distance, roadQuality, riskLevel;
 	};
 
-	// Node with current location distance to iron hills and a list of edges as well as edge count
+	// Node with current location distance to GOAL_LOCATION and a list of edges as well as edge count
 	struct Node {
 		string locationName;
 		int distanceToIronHills;
