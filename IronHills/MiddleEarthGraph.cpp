@@ -53,17 +53,22 @@ void Graph::aStar(string start, Heuristics h, int complexity) {
 		int edges = locations[curr->location].edgeCount;
 		for (int i = 0; i < edges; i++) {
 			int to = getNode(locations[curr->location].edges[i].to);
+			bool checkDuplicate = false;
 			for (int j = 0; j < curr->path.size(); j++)
-				if (curr->path[j] == to)
-					continue;
+				if (curr->path[j] == to) {
+					checkDuplicate = true;
+					break;
+				}
+			if (checkDuplicate)
+				continue;					
 			int dtih = locations[to].distanceToIronHills;
 			int heur;
 			if (complexity == 1)
 				heur = getComplexOneHeuristic(locations[curr->location].edges[i], h);
 			else if (complexity == 2)
-				heur = getComplexTwoHeuristic(locations[curr->location].edges[i], h);
+				heur = getComplexTwoHeuristic(locations[curr->location].edges[i]);
 			else
-				heur = getComplexThreeHeuristic(locations[curr->location].edges[i], h);
+				heur = getComplexThreeHeuristic(locations[curr->location].edges[i]);
 
 			int fn = calculateFn(dtih, heur);
 			addPath(to, fn, heur, curr->location, curr);
@@ -91,16 +96,15 @@ int Graph::getComplexOneHeuristic(Edge e, Heuristics h) {
 	}
 }
 
-int Graph::getComplexTwoHeuristic(Edge e, Heuristics h) {
-
-
-	return 0;
+int Graph::getComplexTwoHeuristic(Edge e) {
+	if (e.riskLevel + e.roadQuality < 0)
+		return e.distance + e.roadQuality;
+	else
+		return e.distance + e.riskLevel;
 }
 
-int Graph::getComplexThreeHeuristic(Edge e, Heuristics h) {
-
-
-	return 0;
+int Graph::getComplexThreeHeuristic(Edge e) {
+	return e.riskLevel + ((e.roadQuality / 4) * 3) + e.distance;
 }
 
 void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {

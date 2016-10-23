@@ -94,8 +94,8 @@ private:
 	int calculateFn(int g, int h);
 
 	int getComplexOneHeuristic(Edge e, Heuristics h);
-	int getComplexTwoHeuristic(Edge e, Heuristics h);
-	int getComplexThreeHeuristic(Edge e, Heuristics h);
+	int getComplexTwoHeuristic(Edge e);
+	int getComplexThreeHeuristic(Edge e);
 
 	void addPath(int loc, int fn, int heur, int parent, const Path* curr);
 
