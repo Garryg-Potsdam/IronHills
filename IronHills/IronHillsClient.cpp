@@ -29,7 +29,7 @@ string getStartingCity();
 Heuristics getHeuristic();
 
 // prompts a user for the heuristic complexity
-bool getSimpleOrComplex();
+int getSimpleOrComplex();
 
 int main() {    
 
@@ -45,7 +45,7 @@ int main() {
 		Heuristics h = getHeuristic();
 
 		// simple or complex heuristic
-		bool simple = getSimpleOrComplex();
+		int simple = getSimpleOrComplex();
 
 		// begin A*
 		middleEarth.aStar(start, h, simple);
@@ -128,10 +128,10 @@ Heuristics getHeuristic(){
 
 
  // prompts a user for the heuristic complexity
-bool getSimpleOrComplex() {
+int getSimpleOrComplex() {
 
 	string question = "Would you like to use simple or complex Heuristic?";
-	question += " Simple (1) or Complex (2) heuristic?\t";
+	question += " ComplexityTypeOne (1) or ComplexityTypeTwo (2) or ComplexityTypeThree (3) heuristic?\t";
 
 	// Answer a question
 	cout << question;
@@ -143,5 +143,5 @@ bool getSimpleOrComplex() {
 	cin >> input;
 
 	// return the answer as a boolean
-	return (input == 1);
+	return input;
 }

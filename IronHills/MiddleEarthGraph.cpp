@@ -41,7 +41,7 @@ Graph::Graph(string nodesWithDistances) {
 	}
 }
 
-void Graph::aStar(string start, Heuristics h, bool simple) {
+void Graph::aStar(string start, Heuristics h, int complexity) {
 	int currLoc = getNode(start);
 	Path* curr = new Path;
 	curr->fn = 0;
@@ -58,10 +58,13 @@ void Graph::aStar(string start, Heuristics h, bool simple) {
 					continue;
 			int dtih = locations[to].distanceToIronHills;
 			int heur;
-			if (simple)
-				heur = getSimpleHeuristic(locations[curr->location].edges[i], h);
+			if (complexity == 1)
+				heur = getComplexOneHeuristic(locations[curr->location].edges[i], h);
+			else if (complexity == 2)
+				heur = getComplexTwoHeuristic(locations[curr->location].edges[i], h);
 			else
-				heur = getComplexHeuristic(locations[curr->location].edges[i], h);
+				heur = getComplexThreeHeuristic(locations[curr->location].edges[i], h);
+
 			int fn = calculateFn(dtih, heur);
 			addPath(to, fn, heur, curr->location, curr);
 		}
@@ -72,11 +75,7 @@ void Graph::aStar(string start, Heuristics h, bool simple) {
 	finalPath = curr;
 }
 
-int Graph::getComplexHeuristic(Edge e, Heuristics h) {
-	return 0;
-}
-
-int Graph::getSimpleHeuristic(Edge e, Heuristics h) {
+int Graph::getComplexOneHeuristic(Edge e, Heuristics h) {
 	switch (h) {
 	case ROAD_QUALITY:
 		return e.roadQuality;
@@ -90,6 +89,18 @@ int Graph::getSimpleHeuristic(Edge e, Heuristics h) {
 	default:
 		break;
 	}
+}
+
+int Graph::getComplexTwoHeuristic(Edge e, Heuristics h) {
+
+
+	return 0;
+}
+
+int Graph::getComplexThreeHeuristic(Edge e, Heuristics h) {
+
+
+	return 0;
 }
 
 void Graph::addPath(int loc, int fn, int heur, int parent, const Path* curr) {
