@@ -9,4 +9,5 @@
 
 #pragma once
 
+// Thrown when a user provides an invalid input in the client
 class InvalidInputFromUserException {};
