@@ -270,16 +270,3 @@ int Graph::stringToInt(string s) {
 int Graph::getSize() {
 	return locCounter - 1;
 }
-
-// Parameters: location - the name of the node being added
-//             distance - the distance from that current node
-//                        to the destination
-// Post-Condition: creates a new node adds it to the locations list
-//                 and increments locCounter
-void Graph::addNode(string location, int distance) {
-	locations[locCounter].locationName = location;
-	locations[locCounter].distanceToIronHills = distance;
-	locations[locCounter].edgeCount = 0;
-	locations[locCounter].visited = false;
-	locCounter++;
-}
